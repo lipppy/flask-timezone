@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block title %} - 404 Not Found{% endblock %}
+
+{% block body %}
+{% include 'public/block.header.html' %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <h2 class="error-code">500</h2>
+            <p class="error-message">Internal server error. Go back to <a href="{{ url_for('frontend.home') }}">Home</a>.</p>
+        </div>
+    </div>
+{% endblock %}

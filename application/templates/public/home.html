@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block title %} - Home{% endblock %}
+
+{% block body %}
+{% include 'public/block.header.html' %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <h2>Timezone information</h2>
+            <h3>API call:</h3>
+            <ul class="list-api-call">
+                <li>{{ url_for('api.timezones', _external=True) }}</li>
+                <li>{{ url_for('api.timezones', _external=True) }}?lat={latitude}&lon={longitude}</li>
+                <li>{{ url_for('api.timezones', _external=True) }}?lat={latitude}&lon={longitude}&utctype=0</li>
+                <li>{{ url_for('api.timezones', _external=True) }}?lat={latitude}&lon={longitude}&utctype=1</li>
+            </ul>
+            <h3>Parameters:</h3>
+            <ul class="list-parameters">
+                <li><b>without parameter or with unknown parameter(s):</b> displays all available timezones</li>
+                <li><b>lat:</b> latitude in EPSG:4326 coordinate reference system</li>
+                <li><b>lon:</b> longitude in EPSG:4326 coordinate reference system</li>
+                <li><b>utctype:</b> determine UTC timezone, can be 0 (from UTC timezone database) or 1 (calculate UTC timezones manually)</li>
+            </ul>
+            <h4>Examples of API calls:</h4>
+            <ul class="list-examples">
+                <li><a href="{{ url_for('api.timezones', _external=True) }}?lat=48.19&lon=16.39" target="_blank">{{ url_for('api.timezones', _external=True) }}?lat=48.19&lon=16.39</a> - returning timezone "Europe/Vienna"</li>
+                <li><a href="{{ url_for('api.timezones', _external=True) }}?lat=47.49&lon=19.04" target="_blank">{{ url_for('api.timezones', _external=True) }}?lat=47.49&lon=19.04</a> - Budapest, Hungary - returning timezone "Europe/Budapest"</li>
+                <li><a href="{{ url_for('api.timezones', _external=True) }}?lat=34.02&lon=-118.49" target="_blank">{{ url_for('api.timezones', _external=True) }}?lat=34.02&lon=-118.49</a> - Los Angeles, USA - returning timezone "America/Los_Angeles"</li>
+                <li><a href="{{ url_for('api.timezones', _external=True) }}?lat=-81.31&lon=-175.49" target="_blank">{{ url_for('api.timezones', _external=True) }}?lat=-81.31&lon=-175.49</a> - Ross Ice, Antarctica - returning timezone "Unknown"</li>
+                <li><a href="{{ url_for('api.timezones', _external=True) }}?lat=-81.31&lon=-175.49&utctype=0" target="_blank">{{ url_for('api.timezones', _external=True) }}?lat=-81.31&lon=-175.49&utctype=0</a> - Ross Ice, Antarctica - returning timezone "UTC-12" <i>(by UTC zones database)</i></li>
+                <li><a href="{{ url_for('api.timezones', _external=True) }}?lat=1.75&lon=-157.3" target="_blank">{{ url_for('api.timezones', _external=True) }}?lat=1.75&lon=-157.3</a> - a little north from (1°) Kiribati, Christmas Island, Pacific Ocean - returning timezone "Pacific/Kiritimati"</li>
+                <li><a href="{{ url_for('api.timezones', _external=True) }}?lat=2.75&lon=-157.3" target="_blank">{{ url_for('api.timezones', _external=True) }}?lat=2.75&lon=-157.3</a> - a little north from (1°) Kiribati, Christmas Island, Pacific Ocean - returning timezone "UTC+14" <i>(from UTC zones data)</i></li>
+                <li><a href="{{ url_for('api.timezones', _external=True) }}?lat=2.75&lon=-157.3&utctype=1" target="_blank">{{ url_for('api.timezones', _external=True) }}?lat=2.75&lon=-157.3&utctype=1</a> - a little north from (1°) Kiribati, Christmas Island, Pacific Ocean - returning timezone "UTC-10" <i>(by manually calculated UTC zones)</i></li>
+            </ul>
+            <h4>Data sources:</h4>
+            <p><a href="http://efele.net/maps/tz/world/" target="_blank">http://efele.net/maps/tz/world/</a></p>
+            <p><a href="https://www.naturalearthdata.com/downloads/10m-cultural-vectors/timezones/" target="_blank">https://www.naturalearthdata.com/downloads/10m-cultural-vectors/timezones/</a></p>
+        </div>
+    </div>
+{% endblock %}
