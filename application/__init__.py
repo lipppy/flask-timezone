@@ -5,7 +5,7 @@ from application.timezoneapi import TimezoneHelper
 
 app = Flask(__name__)
 
-app.config.from_object(os.environ['APP_SETTINGS'])
+app.config.from_object(os.getenv('APP_SETTINGS'))
 
 # Frontend / Public content
 from application._frontend.routes import urls_frontend
